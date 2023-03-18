@@ -1,10 +1,15 @@
 import React, { useState } from "react";
+//mui
+import AddIcon from "@mui/icons-material/Add";
+import { Fab } from "@mui/material";
 
 function CreateArea(props) {
   const [note, setNote] = useState({
     title: "",
     content: "",
   });
+
+  const [isExpand, setExpand] = React.useState(false);
 
   function handleChange(event) {
     const { name, value } = event.target;
@@ -25,24 +30,34 @@ function CreateArea(props) {
     event.preventDefault();
   }
 
+  function expand() {
+    setExpand(true);
+  }
+
   return (
     <div>
-      <form>
-        <input
-          name="title"
-          value={note.title}
-          onChange={handleChange}
-          placeholder="Title"
-        />
+      <form className="create-note">
+        {isExpand ? (
+          <input
+            name="title"
+            value={note.title}
+            onChange={handleChange}
+            placeholder="Title"
+          />
+        ) : null}
 
         <textarea
           name="content"
           value={note.content}
           onChange={handleChange}
           placeholder="Take a note.."
-          rows="4"
+          rows={isExpand ? "4" : "1"}
+          onClick={expand}
         />
-        <button onClick={submitNote}>Add</button>
+
+        <Fab onClick={submitNote}>
+          <AddIcon />
+        </Fab>
       </form>
     </div>
   );
