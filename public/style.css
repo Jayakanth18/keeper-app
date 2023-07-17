@@ -101,3 +101,11 @@ form.create-note button {
   outline: none;
 }
 
+@media screen and (max-width: 768px) {
+  form.create-note {
+    width: 250px;
+  }
+  header h1 {
+    text-align: center;
+  }
+}
